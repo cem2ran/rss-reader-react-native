@@ -1,0 +1,34 @@
+{
+  "name": "mainstream",
+  "version": "0.0.1",
+  "description": "Mainstream: RSS readers have become mainstream",
+  "author": "Cem Turan <cem2ran@gmail.com>",
+  "private": true,
+  "main": "main.js",
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^2.13.1",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-flow-vars": "^0.4.0",
+    "eslint-plugin-flowtype": "^2.3.0",
+    "eslint-plugin-react": "^5.2.2"
+  },
+  "dependencies": {
+    "@exponent/ex-navigation": "^1.5.25",
+    "@exponent/samples": "^1.0.2",
+    "@exponent/vector-icons": "^1.0.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "color": "^0.11.3",
+    "exponent": "^9.0.2",
+    "lodash": "^4.13.1",
+    "react": "15.2.1",
+    "react-native": "github:exponentjs/react-native#sdk-9.0.0",
+    "react-native-scrollable-tab-view": "^0.6.0",
+    "react-native-sortable-listview": "^0.1.1",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0",
+    "redux-observable": "^0.10.0",
+    "rxjs": "^5.0.0-beta.12"
+  }
+}
