@@ -1,26 +1,21 @@
-import React from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React from "react";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
-import Color from 'color';
+import Color from "color";
 
-import Alerts from '../constants/Alerts';
+import Alerts from "../constants/Alerts";
 
-import Rss from '../api/rss';
+import Rss from "../api/rss";
 
-import ScrollableTabView from 'react-native-scrollable-tab-view';
-import CustomTabBar from '../components/CustomTabBar';
+import ScrollableTabView from "react-native-scrollable-tab-view";
+import CustomTabBar from "../components/CustomTabBar";
 
-import MainList from '../components/MainList';
-import Router from '../navigation/Router';
+import MainList from "../components/MainList";
+import Router from "../navigation/Router";
 
 const MainListEl = React.createFactory(MainList);
 
-import store from '../state/store';
+import store from "../state/store";
 
 const selectPage = reducers => reducers.sources.page;
 
@@ -30,14 +25,12 @@ export class HomeScreen extends React.Component {
   static route = {
     navigationBar: {
       visible: true,
-      tintColor: 'white',
-      title: ({sources, page}, config) => sources.length
-        ? sources[page].name
-        : 'Mainstream',
-      backgroundColor: ({sources, page}, config) => sources.length
-        ? sources[page].color
-        : 'silver'
-    },
+      tintColor: "white",
+      title: ({ sources, page }, config) =>
+        sources.length ? sources[page].name : "Mainstream",
+      backgroundColor: ({ sources, page }, config) =>
+        sources.length ? sources[page].color : "silver"
+    }
   };
 
   componentWillMount() {
@@ -49,16 +42,20 @@ export class HomeScreen extends React.Component {
       this.currentPage = selectPage(state);
       this.currentSources = selectSources(state);
 
-      if (previousPage !== this.currentPage || previousSources !== this.currentSources) {
+      if (
+        previousPage !== this.currentPage ||
+        previousSources !== this.currentSources
+      ) {
         this.props.navigator.updateCurrentRouteParams({
-          sources: this.currentSources,//this.props.sources
+          sources: this.currentSources, //this.props.sources
           page: this.currentPage
         });
       }
     });
 
     this.props.dispatch({
-      type: 'CHANGE_PAGE', page: 0
+      type: "CHANGE_PAGE",
+      page: 0
     });
   }
 
@@ -68,53 +65,63 @@ export class HomeScreen extends React.Component {
 
   setActivePage = page => {
     this.props.dispatch({
-      type: 'CHANGE_PAGE', page
+      type: "CHANGE_PAGE",
+      page
     });
   };
 
-  openPage = ({title, link}) => {
+  openPage = ({ title, link }) => {
+    const { navigator, sources, page } = this.props;
 
-    const {navigator, sources, page} = this.props;
-
-    navigator.push(Router.getRoute('article', {
-      title, link: link.href, color: sources[page] && sources[page].color
-    }));
-
+    navigator.push(
+      Router.getRoute("article", {
+        title,
+        link: link.href,
+        color: sources[page] && sources[page].color
+      })
+    );
   };
 
   render() {
-
     if (this.props.sources.length === 0) {
-      return <View style={styles.container}>
-        <Text>{'Empty State: ' + this.props.time}</Text>
-      </View>;
+      return (
+        <View style={styles.container}>
+          <Text>{"Empty State: " + this.props.time}</Text>
+        </View>
+      );
     }
 
-    let pages = this.props.sources.map(({name, icon, feed}, idx) => MainListEl({
-      key: name, id: name, tabLabel: icon,
-      onPress: (item) => this.openPage(item),
-      onLongPress: (item) => {
-        //TODO: Implement save for late / star
-        console.log('onLongPress', item);
-      },
-      load: () => Rss.fetch(feed).catch(() => {
-        this.props.navigator.showLocalAlert(
-          'Load failed. Pull to reload',
-          Alerts.error
-        );
-      })
-    }));
+    let pages = this.props.sources.map(({ name, icon, feed }, idx) =>
+      MainListEl({
+        key: name,
+        id: name,
+        tabLabel: icon,
+        onPress: item => this.openPage(item),
+        onLongPress: item => {
+          //TODO: Implement save for late / star
+          console.log("onLongPress", item);
+        },
+        load: () => Rss.fetch(feed).catch(() => {
+          this.props.navigator.showLocalAlert(
+            "Load failed. Pull to reload",
+            Alerts.error
+          );
+        })
+      }));
     return (
       <View style={styles.container}>
         <ScrollableTabView
-          onChangeTab={({i}) => {
+          onChangeTab={({ i }) => {
             this.setActivePage(i);
           }}
-          renderTabBar={() => <CustomTabBar
-                colors={this.props.sources.map(s => Color(s.color).lighten(0.1).rgb())}
+          renderTabBar={() => (
+            <CustomTabBar
+              colors={this.props.sources.map(s =>
+                Color(s.color).lighten(0.1).rgb())}
             />
-            }>
-          { pages }
+          )}
+        >
+          {pages}
         </ScrollableTabView>
       </View>
     );
@@ -126,82 +133,82 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff"
   },
   contentContainer: {
-    paddingTop: 80,
+    paddingTop: 80
   },
   welcomeContainer: {
-    alignItems: 'center',
-    marginBottom: 30,
+    alignItems: "center",
+    marginBottom: 30
   },
   welcomeText: {
     fontSize: 19,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)"
   },
   welcomeImage: {
     width: 200,
     height: 34.5,
-    marginTop: 3,
+    marginTop: 3
   },
   getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+    alignItems: "center",
+    marginHorizontal: 50
   },
   homeScreenFilename: {
-    marginVertical: 7,
+    marginVertical: 7
   },
   codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+    color: "rgba(96,100,109, 0.8)"
   },
   codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 3,
-    paddingHorizontal: 4,
+    paddingHorizontal: 4
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)",
     lineHeight: 23,
-    textAlign: 'center',
+    textAlign: "center"
   },
   tabBarInfoContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
-        shadowOffset: {height: -3},
+        shadowColor: "black",
+        shadowOffset: { height: -3 },
         shadowOpacity: 0.1,
-        shadowRadius: 3,
+        shadowRadius: 3
       },
       android: {
-        elevation: 20,
-      },
+        elevation: 20
+      }
     }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+    alignItems: "center",
+    backgroundColor: "#fbfbfb",
+    paddingVertical: 20
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+    color: "rgba(96,100,109, 1)",
+    textAlign: "center"
   },
   navigationFilename: {
-    marginTop: 5,
+    marginTop: 5
   },
   helpContainer: {
     marginTop: 15,
-    alignItems: 'center',
+    alignItems: "center"
   },
   helpLink: {
-    paddingVertical: 15,
+    paddingVertical: 15
   },
   helpLinkText: {
     fontSize: 14,
-    color: '#2e78b7',
-  },
+    color: "#2e78b7"
+  }
 });

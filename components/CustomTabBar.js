@@ -1,17 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image
-} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 
 var styles = StyleSheet.create({
   iconbar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center"
   },
   favicon: {
     width: 22,
@@ -23,19 +18,21 @@ var styles = StyleSheet.create({
 
 const isActive = (activeTab, idx) => activeTab === idx;
 
-const CustomTabBar = ({tabs, activeTab, goToPage, colors}) =>
-  <View style={[
-    styles.iconbar,
-      {backgroundColor: colors[activeTab]}
-  ]}>
-    {tabs.map((tab, idx) =>
+const CustomTabBar = ({ tabs, activeTab, goToPage, colors }) => (
+  <View style={[styles.iconbar, { backgroundColor: colors[activeTab] }]}>
+    {tabs.map((tab, idx) => (
       <TouchableOpacity key={idx} onPress={() => goToPage(idx)}>
-        <Image style={[styles.favicon, isActive(activeTab, idx) ? {opacity: 1} : {}]}
-               source={tab}/>
+        <Image
+          style={[
+            styles.favicon,
+            isActive(activeTab, idx) ? { opacity: 1 } : {}
+          ]}
+          source={tab}
+        />
       </TouchableOpacity>
-    )}
-  </View>;
-
+    ))}
+  </View>
+);
 
 CustomTabBar.propTypes = {
   goToPage: React.PropTypes.func,

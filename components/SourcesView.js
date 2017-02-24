@@ -1,38 +1,35 @@
-import React from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Text,
-  View,
-} from 'react-native';
+import React from "react";
+import { StyleSheet, TouchableOpacity, Image, Text, View } from "react-native";
 
-import SortableListView from 'react-native-sortable-listview';
+import SortableListView from "react-native-sortable-listview";
 
-const getKeys = sources => sources.reduce((acc, item) =>
-  [...acc, item.feed], []);
+const getKeys = sources =>
+  sources.reduce((acc, item) => [...acc, item.feed], []);
 
-const getMap = sources => sources.reduce((acc, item) => {
-  acc[item.feed] = item;
-  return acc;
-}, {});
+const getMap = sources => sources.reduce(
+  (acc, item) => {
+    acc[item.feed] = item;
+    return acc;
+  },
+  {}
+);
 
-const SourcesView = ({sources, setOrdering, handlePress}) => {
+const SourcesView = ({ sources, setOrdering, handlePress }) => {
   return (
     <SortableListView
-      style={{flex: 1}}
+      style={{ flex: 1 }}
       order={getKeys(sources)}
       data={getMap(sources)}
       onRowMoved={setOrdering}
-      renderRow={source =>
+      renderRow={source => (
         <TouchableOpacity style={styles.optionsContainer} onPress={handlePress}>
           <View style={styles.option}>
             <View style={styles.optionIconContainer}>
               <Image
-                source={require('../assets/images/exponent-icon.png')}
-                resizeMode='contain'
+                source={require("../assets/images/exponent-icon.png")}
+                resizeMode="contain"
                 fadeDuration={0}
-                style={{width: 20, height: 20, marginTop: 1}}
+                style={{ width: 20, height: 20, marginTop: 1 }}
               />
             </View>
             <View style={styles.optionTextContainer}>
@@ -42,8 +39,9 @@ const SourcesView = ({sources, setOrdering, handlePress}) => {
             </View>
           </View>
         </TouchableOpacity>
-      }
-    />);
+      )}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
@@ -59,14 +57,14 @@ const styles = StyleSheet.create({
   },
   optionsContainer: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#EDEDED'
+    borderBottomColor: "#EDEDED"
   },
   optionIconContainer: {
     marginRight: 9
   },
   option: {
-    flexDirection: 'row',
-    backgroundColor: 'rgba(0,0,0,0.02)',
+    flexDirection: "row",
+    backgroundColor: "rgba(0,0,0,0.02)",
     paddingHorizontal: 15,
     paddingVertical: 15
   },

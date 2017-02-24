@@ -1,31 +1,31 @@
-import {StyleSheet} from 'react-native';
-import Colors from './Colors';
+import { StyleSheet } from "react-native";
+import Colors from "./Colors";
 
 export default {
   error: StyleSheet.create({
     container: {
-      backgroundColor: Colors.errorBackground,
+      backgroundColor: Colors.errorBackground
     },
     text: {
-      color: Colors.errorText,
+      color: Colors.errorText
     }
   }),
 
   warning: StyleSheet.create({
     container: {
-      backgroundColor: Colors.warningBackground,
+      backgroundColor: Colors.warningBackground
     },
     text: {
-      color: Colors.warningText,
-    },
+      color: Colors.warningText
+    }
   }),
 
   notice: StyleSheet.create({
     container: {
-      backgroundColor: Colors.noticeBackground,
+      backgroundColor: Colors.noticeBackground
     },
     text: {
-      color: Colors.noticeText,
-    },
-  }),
+      color: Colors.noticeText
+    }
+  })
 };

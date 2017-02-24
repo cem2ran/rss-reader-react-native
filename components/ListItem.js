@@ -1,17 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import {
-  View,
-  Text,
-  StyleSheet
-} from 'react-native';
+import { View, Text, StyleSheet } from "react-native";
 
-const ListItem = ({title, published, updated}) => (
+const ListItem = ({ title, published, updated }) => (
   <View>
     <View style={styles.row}>
-      <Text
-        style={styles.title}
-        numberOfLines={1}>
+      <Text style={styles.title} numberOfLines={1}>
         {title}
       </Text>
       <Text style={styles.description}>
@@ -24,10 +18,10 @@ const ListItem = ({title, published, updated}) => (
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingLeft: 14,
     paddingRight: 14,
-    backgroundColor: '#F6F6F6'
+    backgroundColor: "#F6F6F6"
   },
   title: {
     paddingTop: 10,
@@ -37,15 +31,15 @@ const styles = StyleSheet.create({
     flex: 1
   },
   description: {
-    color: '#B4AEAE',
+    color: "#B4AEAE",
     fontSize: 12,
-    position: 'absolute',
+    position: "absolute",
     left: 14,
     bottom: 4
   },
   separator: {
     height: 1,
-    backgroundColor: '#CCCCCC',
+    backgroundColor: "#CCCCCC"
   }
 });
 
