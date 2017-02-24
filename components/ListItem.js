@@ -2,19 +2,24 @@ import React from "react";
 
 import { View, Text, StyleSheet } from "react-native";
 
-const ListItem = ({ title, published, updated }) => (
-  <View>
-    <View style={styles.row}>
-      <Text style={styles.title} numberOfLines={1}>
-        {title}
-      </Text>
-      <Text style={styles.description}>
-        {new Date(published || updated).toDateString()}
-      </Text>
-    </View>
-    <View style={styles.separator} />
-  </View>
-);
+export default class ListItem extends React.Component {
+  render() {
+    const { title, published, updated } = this.props;
+    return (
+      <View>
+        <View style={styles.row}>
+          <Text style={styles.title} numberOfLines={1}>
+            {title}
+          </Text>
+          <Text style={styles.description}>
+            {new Date(published || updated).toDateString()}
+          </Text>
+        </View>
+        <View style={styles.separator} />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   row: {
@@ -25,7 +30,7 @@ const styles = StyleSheet.create({
   },
   title: {
     paddingTop: 10,
-    paddingBottom: 25,
+    paddingBottom: 20,
     paddingRight: 15,
     fontSize: 16,
     flex: 1
@@ -42,5 +47,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#CCCCCC"
   }
 });
-
-export default ListItem;

@@ -353,6 +353,10 @@ babel-plugin-module-resolver@^2.3.0:
     glob "^7.1.1"
     resolve "^1.2.0"
 
+"babel-plugin-react-pure-to-class@https://github.com/ericclemmons/babel-plugin-react-pure-to-class":
+  version "1.0.0"
+  resolved "https://github.com/ericclemmons/babel-plugin-react-pure-to-class#87112ba4f04769c16acb425b14339e15cc75132d"
+
 babel-plugin-react-transform@2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-react-transform/-/babel-plugin-react-transform-2.0.2.tgz#515bbfa996893981142d90b1f9b1635de2995109"

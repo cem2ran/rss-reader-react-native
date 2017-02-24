@@ -1,20 +1,12 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
 
-import * as reducers from "./reducers";
-
-import {
-  NavigationReducer as navigation,
-  createNavigationEnabledStore
-} from "@exponent/ex-navigation";
-
-const rootReducer = combineReducers({
-  navigation,
-  ...reducers
-});
+import { createNavigationEnabledStore } from "@exponent/ex-navigation";
 
 import { createEpicMiddleware } from "redux-observable";
 
 import rootEpic from "./epics";
+
+import rootReducer from "./reducers";
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
@@ -23,5 +15,12 @@ const createStoreWithNavigation = createNavigationEnabledStore({
   createStore: createStoreWithMiddleware
 });
 const store = createStoreWithNavigation(rootReducer);
+
+if (module.hot) {
+  module.hot.accept(() => {
+    const nextRootReducer = require("./reducers/index").default;
+    store.replaceReducer(nextRootReducer);
+  });
+}
 
 export default store;

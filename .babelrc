@@ -1,8 +1,12 @@
 {
-  "presets": ["babel-preset-exponent"],
+  "presets": [
+    "babel-preset-exponent"
+  ],
   "env": {
     "development": {
-      "plugins": ["transform-react-jsx-source"]
+      "plugins": [
+        "transform-react-jsx-source"
+      ]
     }
   }
 }
