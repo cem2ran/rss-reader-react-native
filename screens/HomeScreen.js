@@ -111,7 +111,7 @@ export class HomeScreen extends React.Component {
             this.setActivePage(i);
           }}
           renderTabBar={() => <CustomTabBar
-                colors={this.props.sources.map(s => Color(s.color).lighten(0.1).rgbString())}
+                colors={this.props.sources.map(s => Color(s.color).lighten(0.1).rgb())}
             />
             }>
           { pages }

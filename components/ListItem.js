@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   title: {
     paddingTop: 10,
-    paddingBottom: 20,
+    paddingBottom: 25,
     paddingRight: 15,
     fontSize: 16,
     flex: 1

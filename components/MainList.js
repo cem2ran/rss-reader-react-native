@@ -91,7 +91,7 @@ export default class MainList extends Component {
           initialListSize={15}
           dataSource={this.state.dataSource}
           keyboardDismissMode='on-drag'
-          keyboardShouldPersistTaps={true}
+          keyboardShouldPersistTaps="always" 
           showsVerticalScrollIndicator={false}
           renderRow={this.renderItem}/>
     );
